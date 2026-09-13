@@ -1,0 +1,9 @@
+build/
+.gradle/
+.kotlin/
+local.properties
+*.iml
+.idea/
+# The release keystore is generated once and lives only in GitHub secrets (and the maintainer's backup).
+signingkey.jks
+*.jks

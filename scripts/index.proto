@@ -1,0 +1,49 @@
+// The extension-store index as Mihon reads it (mihon/data/.../NetworkExtensionStore.kt) plus the one field
+// Suwayomi adds (resources.jarUrl = 501). scripts/publish-repo.py encodes this by hand; keep them in step.
+syntax = "proto3";
+
+message Index {
+  string name = 1;
+  string badgeLabel = 2;
+  string signingKey = 3;          // SHA-256 of the signing certificate, hex
+  Contact contact = 4;
+  ExtensionList extensionList = 101;
+  string extensionListUrl = 102;  // alternative to embedding the list
+
+  message Contact {
+    string website = 1;
+    string discord = 2;
+  }
+  message ExtensionList {
+    repeated Extension extensions = 1;
+  }
+  message Extension {
+    string name = 1;
+    string packageName = 2;
+    Resources resources = 3;
+    string extensionLib = 4;
+    int64 versionCode = 5;
+    string versionName = 6;
+    ContentWarning contentWarning = 7;
+    repeated Source sources = 8;
+  }
+  message Resources {
+    string apkUrl = 1;
+    string iconUrl = 2;
+    string jarUrl = 501;          // Suwayomi only: the JVM build
+  }
+  message Source {
+    int64 id = 1;
+    string name = 2;
+    string language = 3;
+    string homeUrl = 4;
+    repeated string mirrorUrls = 5;
+    string message = 7;
+  }
+  enum ContentWarning {
+    CONTENT_WARNING_UNSPECIFIED = 0;
+    CONTENT_WARNING_SAFE = 1;
+    CONTENT_WARNING_MIXED = 2;
+    CONTENT_WARNING_NSFW = 3;
+  }
+}
