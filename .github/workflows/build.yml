@@ -51,7 +51,10 @@ jobs:
         id: cert
         run: |
           APK=build/outputs/apk/release/uchiyomi-extension-release.apk
-          FP=$("$ANDROID_HOME"/build-tools/*/apksigner verify --print-certs "$APK" | sed -n 's/.*SHA-256 digest: //p' | head -1)
+          # the runner image ships several build-tools versions; a bare glob hands apksigner two paths
+          APKSIGNER=$(ls -d "$ANDROID_HOME"/build-tools/*/ | sort -V | tail -1)apksigner
+          FP=$("$APKSIGNER" verify --print-certs "$APK" | sed -n 's/.*SHA-256 digest: //p' | head -1)
+          [ -n "$FP" ] || { echo "could not read the signer"; exit 1; }
           echo "fingerprint=$FP" >> "$GITHUB_OUTPUT"
           echo "signed by $FP"
 
