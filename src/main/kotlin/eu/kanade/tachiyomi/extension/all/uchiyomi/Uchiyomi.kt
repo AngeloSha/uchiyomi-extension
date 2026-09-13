@@ -92,7 +92,7 @@ class Uchiyomi : HttpSource(), ConfigurableSource {
     private fun apiUrl(path: String): String {
         val base = baseUrl
         if (base.isEmpty()) throw Exception("Set the server address in the extension settings")
-        if (token.isEmpty()) throw Exception("Set an API token in the extension settings (Profile → Security → API tokens)")
+        if (token.isEmpty()) throw Exception("Set an API token in the extension settings (in Uchiyomi: Profile → Account → API tokens → Manage)")
         // `?adult=1` is how the API is asked to include 18+ libraries in listings; absent means hidden.
         val sep = if ('?' in path) '&' else '?'
         return if (showAdult) "$base$path${sep}adult=1" else "$base$path"
@@ -294,7 +294,7 @@ class Uchiyomi : HttpSource(), ConfigurableSource {
         }
         val detail = server?.message ?: server?.error
         return when (code) {
-            401 -> "Uchiyomi rejected the API token (401). Check it under Profile → Security → API tokens."
+            401 -> "Uchiyomi rejected the API token (401). Check it under Profile → Account → API tokens."
             403 -> "Not allowed (403): ${detail ?: "the token lacks a scope this needs"}"
             404 -> "Not found (404)${detail?.let { ": $it" } ?: ""}"
             else -> "Uchiyomi answered $code${detail?.let { ": $it" } ?: ""}"
@@ -334,8 +334,8 @@ class Uchiyomi : HttpSource(), ConfigurableSource {
         EditTextPreference(ctx).apply {
             key = PREF_TOKEN
             title = "API token"
-            summary = "Profile → Security → API tokens. The read scope is enough: this extension never writes, " +
-                "so reading progress stays in this app and is not sent back to Uchiyomi."
+            summary = "In Uchiyomi: Profile → Account → API tokens → Manage → New token. Leave \"Allow changes\" off: " +
+                "this extension never writes, so reading progress stays in this app and is not sent back to Uchiyomi."
             dialogTitle = title
             setOnBindEditTextListener { it.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD }
             setOnPreferenceChangeListener { _, new ->

@@ -32,7 +32,7 @@ plugins {
  * `tachiyomix.extensionLib`, and stores show the name verbatim.
  */
 val extLib = "1.6"
-val extVersionCode = 1
+val extVersionCode = 2
 val extVersionName = "$extLib.$extVersionCode"
 
 /** The pinned source id: md5("uchiyomi/all/1") truncated the way HttpSource.generateId does. Frozen forever. */

@@ -17,8 +17,9 @@ reads (`index.min.json`, `repo.json`, `index.json`, `index.pb`), so the same URL
 
 ## Set it up
 
-1. In Uchiyomi, open **Profile → Security → API tokens** and create a token with the **read** scope.
-   That is all the extension needs.
+1. In Uchiyomi, open **Profile → Account**, scroll to the **API tokens** card, tap **Manage**, then
+   **New token**. Give it a name and leave *Allow changes* unticked — a read-only token is all the extension
+   needs. Copy the `uy_…` value straight away; it is shown once.
 2. In the extension's settings: **Server address** (your Uchiyomi URL, e.g. `https://manga.example.com`)
    and **API token**. Each is checked the moment you save it — you get a toast saying *Uchiyomi found at …*
    and *Connected as …*, or the reason it did not work.
