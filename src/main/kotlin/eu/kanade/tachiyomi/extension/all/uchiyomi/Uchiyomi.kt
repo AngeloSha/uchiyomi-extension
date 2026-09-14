@@ -275,6 +275,7 @@ class Uchiyomi : HttpSource(), ConfigurableSource {
         name = row.name
         chapter_number = row.chapterNumber
         date_upload = row.dateUpload
+        scanlator = row.scanlator
     }
 
     // ---- decoding ------------------------------------------------------------------------------------------

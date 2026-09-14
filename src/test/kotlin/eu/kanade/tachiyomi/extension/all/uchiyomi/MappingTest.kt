@@ -113,6 +113,23 @@ class MappingTest {
         assertEquals("/api/books/b_live", rows[0].url)
     }
 
+    @Test fun `a chapter carries its scanlation group when the server knows it`() {
+        // Reintroduce by dropping `scanlator = ...` from Mapping.chapter: every row's group is null and the
+        // host's group filter has nothing to filter by, though every chapter still lists and reads.
+        val books = Mapping.json.decodeFromString<PageDto<BookDto>>(
+            """{"content":[{"id":"b_grp","number":1,"metadata":{"numberSort":1},"scanlator":"Fuuscans"},
+                         {"id":"b_blank","number":2,"metadata":{"numberSort":2},"scanlator":""},
+                         {"id":"b_old","number":3,"metadata":{"numberSort":3}}],
+                "last":true,"totalElements":3}""",
+        ).content
+        val byId = Mapping.chapters(books).associateBy { it.url }
+        assertEquals("Fuuscans", byId["/api/books/b_grp"]!!.scanlator)
+        assertNull("a blank group is no group", byId["/api/books/b_blank"]!!.scanlator)
+        assertNull("an older server that sends no key is no group", byId["/api/books/b_old"]!!.scanlator)
+        // the captured fixture predates groups on the server: every real row must still map, with none
+        assertTrue(Mapping.chapters(Mapping.json.decodeFromString<PageDto<BookDto>>(fixture("books.json")).content).all { it.scanlator == null })
+    }
+
     @Test fun `an unparseable date is zero rather than a crash`() {
         assertEquals(0L, Mapping.parseDate(null))
         assertEquals(0L, Mapping.parseDate(""))

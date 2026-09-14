@@ -34,6 +34,8 @@ chapters of a series — credit cards, "read on our site" plates — but never l
 Requires Uchiyomi **v0.29.0** or newer (the release that lets an API token fetch images and search).
 Since 1.6.3 the extension hides chapters the server deleted to free space (Uchiyomi >= 0.32.0 keeps the
 chapter row so reading history survives, but the file is gone and every page would be a 404).
+Since 1.6.4 each chapter carries its scanlation group (Uchiyomi >= 0.31.0 records which group's release it
+took), so Mihon's and Tachimanga's own filter and sort by group work on an Uchiyomi library.
 
 ## What it cannot do
 

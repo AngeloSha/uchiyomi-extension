@@ -69,6 +69,12 @@ class BookDto(
      * the row so progress survives). Present only when true, like `junk`.
      */
     val pruned: Boolean = false,
+    /**
+     * The scanlation group the file came from, as Uchiyomi >= 0.31.0 records it (null for files it did not
+     * download itself or took before it kept groups). Older servers omit the key; the default keeps them
+     * decoding.
+     */
+    val scanlator: String? = null,
 )
 
 @Serializable

@@ -38,6 +38,7 @@ object Mapping {
         val name: String,
         val chapterNumber: Float,
         val dateUpload: Long,
+        val scanlator: String?,
     )
 
     /**
@@ -79,6 +80,9 @@ object Mapping {
         name = b.metadata.title?.takeIf { it.isNotBlank() } ?: b.name.ifBlank { "Chapter ${b.number}" },
         chapterNumber = b.metadata.numberSort ?: b.number,
         dateUpload = parseDate(b.metadata.releaseDate),
+        // Mihon and Tachimanga filter and sort a chapter list by group on their own; that only works when the
+        // group travels with the chapter. A blank name is no group, so the host does not offer "" as a filter.
+        scanlator = b.scanlator?.takeIf { it.isNotBlank() },
     )
 
     /**
