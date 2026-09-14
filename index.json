@@ -1,0 +1,34 @@
+{
+  "name": "Uchiyomi",
+  "badgeLabel": "UCHI",
+  "signingKey": "958f22770d87438dd4996b7e08e456c1c8d289610ac4fd2b81970fb7b27a1742",
+  "contact": {
+    "website": "https://uchiyomi.com",
+    "discord": null
+  },
+  "extensionList": {
+    "extensions": [
+      {
+        "name": "Uchiyomi",
+        "packageName": "eu.kanade.tachiyomi.extension.all.uchiyomi",
+        "resources": {
+          "apkUrl": "https://raw.githubusercontent.com/AngeloSha/uchiyomi-extension/repo/apk/tachiyomi-all.uchiyomi-v1.6.4.apk",
+          "iconUrl": "https://raw.githubusercontent.com/AngeloSha/uchiyomi-extension/repo/icon/eu.kanade.tachiyomi.extension.all.uchiyomi.png",
+          "jarUrl": "https://raw.githubusercontent.com/AngeloSha/uchiyomi-extension/repo/jar/tachiyomi-all.uchiyomi-v1.6.4.jar"
+        },
+        "extensionLib": "1.6",
+        "versionCode": "4",
+        "versionName": "1.6.4",
+        "contentWarning": "CONTENT_WARNING_SAFE",
+        "sources": [
+          {
+            "id": "8683375824843625513",
+            "name": "Uchiyomi",
+            "language": "all",
+            "homeUrl": "https://uchiyomi.com"
+          }
+        ]
+      }
+    ]
+  }
+}

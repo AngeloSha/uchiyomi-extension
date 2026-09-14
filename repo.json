@@ -1,0 +1,9 @@
+{
+  "index_v2": "https://raw.githubusercontent.com/AngeloSha/uchiyomi-extension/repo/index.pb",
+  "meta": {
+    "name": "Uchiyomi",
+    "shortName": "UCHI",
+    "website": "https://uchiyomi.com",
+    "signingKeyFingerprint": "958f22770d87438dd4996b7e08e456c1c8d289610ac4fd2b81970fb7b27a1742"
+  }
+}
