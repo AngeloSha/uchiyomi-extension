@@ -32,6 +32,8 @@ chapters of a series — credit cards, "read on our site" plates — but never l
 **Show 18+ libraries** includes libraries marked adult.
 
 Requires Uchiyomi **v0.29.0** or newer (the release that lets an API token fetch images and search).
+Since 1.6.3 the extension hides chapters the server deleted to free space (Uchiyomi >= 0.32.0 keeps the
+chapter row so reading history survives, but the file is gone and every page would be a 404).
 
 ## What it cannot do
 

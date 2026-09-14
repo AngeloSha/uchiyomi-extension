@@ -84,8 +84,12 @@ object Mapping {
     /**
      * Chapters as Mihon wants them: newest first. The server pages them oldest first, and a list that is
      * merely reversed per page would interleave wrongly, so callers concatenate all pages and reverse once.
+     *
+     * A chapter the server deleted (`pruned`) is left out: it still has a row, so the server lists it, but
+     * it has no pages -- the image server answers 404 per page, which Mihon shows as a broken chapter, and a
+     * reader who then re-downloads it in Mihon gets the same 404s again.
      */
-    fun chapters(all: List<BookDto>): List<ChapterRow> = all.map(::chapter).asReversed()
+    fun chapters(all: List<BookDto>): List<ChapterRow> = all.filter { !it.pruned }.map(::chapter).asReversed()
 
     /**
      * Which page numbers to fetch for a chapter.

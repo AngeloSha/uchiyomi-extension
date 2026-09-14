@@ -99,6 +99,20 @@ class MappingTest {
         assertEquals(1788037840000L, rows.last().dateUpload)
     }
 
+    @Test fun `a chapter the server deleted is not listed`() {
+        // Reintroduce by dropping the `filter { !it.pruned }` in Mapping.chapters: both books come back and
+        // the pruned one opens as a chapter whose every page is a 404.
+        val books = Mapping.json.decodeFromString<PageDto<BookDto>>(
+            """{"content":[{"id":"b_live","number":1,"metadata":{"numberSort":1}},
+                         {"id":"b_gone","number":2,"metadata":{"numberSort":2},"pruned":true}],
+                "last":true,"totalElements":2}""",
+        ).content
+        assertTrue("the field decodes", books[1].pruned)
+        val rows = Mapping.chapters(books)
+        assertEquals(1, rows.size)
+        assertEquals("/api/books/b_live", rows[0].url)
+    }
+
     @Test fun `an unparseable date is zero rather than a crash`() {
         assertEquals(0L, Mapping.parseDate(null))
         assertEquals(0L, Mapping.parseDate(""))

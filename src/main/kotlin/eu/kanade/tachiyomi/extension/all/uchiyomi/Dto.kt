@@ -64,6 +64,11 @@ class BookDto(
     val number: Float = 0f,
     val metadata: BookMetadataDto = BookMetadataDto(),
     val media: MediaDto? = null,
+    /**
+     * The server deleted this chapter's file (Uchiyomi >= 0.32.0 prunes read chapters on request and keeps
+     * the row so progress survives). Present only when true, like `junk`.
+     */
+    val pruned: Boolean = false,
 )
 
 @Serializable
